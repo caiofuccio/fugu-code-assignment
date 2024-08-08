@@ -3,6 +3,6 @@ import { analyzeEmailRouter } from './analyzeEmailRouter';
 
 const router = Router();
 
-router.use('/analyzeEmail', analyzeEmailRouter);
+router.use('/analyze-email', analyzeEmailRouter);
 
 export default router;
