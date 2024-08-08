@@ -9,14 +9,6 @@ const main = async (port: number) => {
     try {
         const app = express();
         app.use(cors());
-        app.use(function (_, res, next) {
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header(
-                'Access-Control-Allow-Headers',
-                'Content-Type, authorization',
-            );
-            next();
-        });
         app.use(express.urlencoded({ extended: true }));
         app.use(express.json());
         app.use(routes);
