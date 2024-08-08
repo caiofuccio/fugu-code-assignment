@@ -11,8 +11,12 @@ const main = async (port: number) => {
         app.use(express.urlencoded({ extended: true }));
         app.use(express.json());
 
+        const allowedOrigins = [
+            'https://caiofuccio.github.io',
+            'http://localhost:8080',
+        ];
         const corsOptions = {
-            origin: 'https://caiofuccio.github.io',
+            origin: allowedOrigins,
             methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
             allowedHeaders: 'Content-Type,authorization',
         };
