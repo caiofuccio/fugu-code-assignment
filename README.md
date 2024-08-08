@@ -14,7 +14,7 @@ You run the EC2 instance in the following address:
 http://ec2-18-230-11-216.sa-east-1.compute.amazonaws.com:8080
 ```
 
-The endpoint to analyze the email is /analyzeEmail. This endpoint is secured and needs a authorization to be passed on the header.
+The endpoint to analyze the email is /analyze-email. This endpoint is secured and needs a authorization to be passed on the header.
 
 For more information about the endpoint, you can access the Swagger documentation at:
 
