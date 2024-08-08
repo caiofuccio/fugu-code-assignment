@@ -9,9 +9,11 @@ analyzeEmailRouter.post('/', async (request: Request, response: Response) => {
     const { emailText } = request.body;
     const { AUTHENTICATION_TOKEN } = process.env;
 
-    if (!authorization || authorization != AUTHENTICATION_TOKEN) {
+    if (!authorization || authorization != AUTHENTICATION_TOKEN)
         response.status(401).send('Not authorized request');
-    }
+
+    if (!emailText)
+        response.status(400).send('Missing emailText on the request');
 
     try {
         const analyzedEmailData: EmailDataType =

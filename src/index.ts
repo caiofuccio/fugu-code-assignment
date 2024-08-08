@@ -10,7 +10,14 @@ const main = async (port: number) => {
         const app = express();
         app.use(express.urlencoded({ extended: true }));
         app.use(express.json());
-        app.use(cors());
+
+        const corsOptions = {
+            origin: 'https://caiofuccio.github.io',
+            methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+            allowedHeaders: 'Content-Type,authorization',
+        };
+
+        app.use(cors(corsOptions));
         app.use(routes);
 
         app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOutput));
