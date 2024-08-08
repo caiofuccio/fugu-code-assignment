@@ -8,28 +8,17 @@ import swaggerOutput from './swagger_output.json';
 const main = async (port: number) => {
     try {
         const app = express();
+        app.use(cors());
+        app.use(function (_, res, next) {
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header(
+                'Access-Control-Allow-Headers',
+                'Content-Type, authorization',
+            );
+            next();
+        });
         app.use(express.urlencoded({ extended: true }));
         app.use(express.json());
-
-        const allowedOrigins = [
-            'https://caiofuccio.github.io',
-            'http://localhost:8080',
-        ];
-        const corsOptions = {
-            origin: (origin: string | undefined, callback: Function) => {
-                if (!origin) return callback(null, true);
-
-                if (allowedOrigins.includes(origin)) {
-                    callback(null, true);
-                } else {
-                    callback(new Error('Not allowed by CORS'));
-                }
-            },
-            methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-            allowedHeaders: 'Content-Type,authorization',
-        };
-
-        app.use(cors(corsOptions));
         app.use(routes);
 
         app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOutput));
