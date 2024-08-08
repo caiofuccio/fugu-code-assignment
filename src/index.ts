@@ -2,6 +2,8 @@ import cors from 'cors';
 import express from 'express';
 import dotenv from 'dotenv';
 import routes from './routes';
+import swaggerUi from 'swagger-ui-express';
+import swaggerOutput from './swagger_output.json';
 
 const main = async (port: number) => {
     try {
@@ -10,6 +12,8 @@ const main = async (port: number) => {
         app.use(express.json());
         app.use(cors());
         app.use(routes);
+
+        app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 
         app.listen(port || 8080, () =>
             console.log(`Server running on port ${port}`),
