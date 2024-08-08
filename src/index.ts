@@ -16,7 +16,15 @@ const main = async (port: number) => {
             'http://localhost:8080',
         ];
         const corsOptions = {
-            origin: allowedOrigins,
+            origin: (origin: string | undefined, callback: Function) => {
+                if (!origin) return callback(null, true);
+
+                if (allowedOrigins.includes(origin)) {
+                    callback(null, true);
+                } else {
+                    callback(new Error('Not allowed by CORS'));
+                }
+            },
             methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
             allowedHeaders: 'Content-Type,authorization',
         };
