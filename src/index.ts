@@ -1,6 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import dotenv from 'dotenv';
+import routes from './routes';
 
 const main = async (port: number) => {
     try {
@@ -8,6 +9,7 @@ const main = async (port: number) => {
         app.use(express.urlencoded({ extended: true }));
         app.use(express.json());
         app.use(cors());
+        app.use(routes);
 
         app.listen(port || 8080, () =>
             console.log(`Server running on port ${port}`),
